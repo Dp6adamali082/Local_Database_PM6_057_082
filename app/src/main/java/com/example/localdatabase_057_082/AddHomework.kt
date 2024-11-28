@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.example.databaselokal.databinding.ActivityAddHomeworkBinding
+import com.example.localdatabase_057_082.DatabaseContract
 import com.example.localdatabase_057_082.Homework
+import com.example.localdatabase_057_082.HomeworkHelper
+import com.example.localdatabase_057_082.databinding.ActivityAddHomeworkBinding
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
