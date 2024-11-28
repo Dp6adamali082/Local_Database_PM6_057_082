@@ -1,20 +1,12 @@
 package com.example.localdatabase_057_082
 
-import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
-class Homework : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-    }
-}
+@Parcelize
+data class Homework(
+    var id: Int = 0,
+    var title: String? = null,
+    var description: String? = null,
+    var date: String? = null
+) : Parcelable
