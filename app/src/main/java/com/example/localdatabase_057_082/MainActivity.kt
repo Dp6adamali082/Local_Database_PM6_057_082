@@ -1,4 +1,4 @@
-package com.example.modul7
+package com.example.localdatabase_057_082
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,10 +6,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.databaselokal.AddHomeworkActivity
-import com.example.localdatabase_057_082.Homework
-import com.example.localdatabase_057_082.HomeworkAdapter
-import com.example.modul7.databi.Actinding.vityMainBinding
+import com.example.localdatabase.MappingHelper
+import com.example.localdatabase_057_082.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -23,21 +21,21 @@ class MainActivity : AppCompatActivity() {
     private val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.data != null) {
             when (result.resultCode) {
-                AddHomeworkActivity.RESULT_ADD -> {
-                    val homework = result.data?.getParcelableExtra<Homework>(AddHomeworkActivity.EXTRA_HOMEWORK) as Homework
+                AddHomework.RESULT_ADD -> {
+                    val homework = result.data?.getParcelableExtra<Homework>(AddHomework.EXTRA_HOMEWORK) as Homework
                     adapter.addItem(homework)
                     binding.rvHomework.smoothScrollToPosition(adapter.itemCount - 1)
                     showSnackbarMessage("Data berhasil ditambahkan")
                 }
-                AddHomeworkActivity.RESULT_UPDATE -> {
-                    val homework = result.data?.getParcelableExtra<Homework>(AddHomeworkActivity.EXTRA_HOMEWORK) as Homework
-                    val position = result.data?.getIntExtra(AddHomeworkActivity.EXTRA_POSITION, 0) as Int
+                AddHomework.RESULT_UPDATE -> {
+                    val homework = result.data?.getParcelableExtra<Homework>(AddHomework.EXTRA_HOMEWORK) as Homework
+                    val position = result.data?.getIntExtra(AddHomework.EXTRA_POSITION, 0) as Int
                     adapter.updateItem(position, homework)
                     binding.rvHomework.smoothScrollToPosition(position)
                     showSnackbarMessage("Data berhasil diubah")
                 }
-                AddHomeworkActivity.RESULT_DELETE -> {
-                    val position = result.data?.getIntExtra(AddHomeworkActivity.EXTRA_POSITION, 0) as Int
+                AddHomework.RESULT_DELETE -> {
+                    val position = result.data?.getIntExtra(AddHomework.EXTRA_POSITION, 0) as Int
                     adapter.removeItem(position)
                     showSnackbarMessage("Data berhasil dihapus")
                 }
@@ -56,18 +54,18 @@ class MainActivity : AppCompatActivity() {
         binding.rvHomework.setHasFixedSize(true)
 
         adapter = HomeworkAdapter(object : HomeworkAdapter.OnItemClickCallback {
-            override fun onItemClick(selectedHomework: Homework, position: Int) {
-                val intent = Intent(this@MainActivity, AddHomeworkActivity::class.java)
-                intent.putExtra(AddHomeworkActivity.EXTRA_HOMEWORK, selectedHomework)
-                intent.putExtra(AddHomeworkActivity.EXTRA_POSITION, position)
+            override fun onItemClicked(selectedHomework: Homework, position: Int) {
+                val intent = Intent(this@MainActivity, AddHomework::class.java)
+                intent.putExtra(AddHomework.EXTRA_HOMEWORK, selectedHomework)
+                intent.putExtra(AddHomework.EXTRA_POSITION, position)
                 resultLauncher.launch(intent)
             }
         })
-A
+
         binding.rvHomework.adapter = adapter
 
         binding.fabAdd.setOnClickListener {
-            val intent = Intent(this, AddHomeworkActivity::class.java)
+            val intent = Intent(this, AddHomework::class.java)
             resultLauncher.launch(intent)
         }
 

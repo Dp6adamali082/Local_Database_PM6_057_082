@@ -1,4 +1,4 @@
-package com.example.databaselokal
+package com.example.localdatabase_057_082
 
 import android.content.ContentValues
 import android.content.Intent
@@ -6,15 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.example.localdatabase_057_082.DatabaseContract
-import com.example.localdatabase_057_082.Homework
-import com.example.localdatabase_057_082.HomeworkHelper
 import com.example.localdatabase_057_082.databinding.ActivityAddHomeworkBinding
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class AddHomeworkActivity : AppCompatActivity() {
+class AddHomework : AppCompatActivity() {
 
     private var isEdit = false
     private var homework: Homework? = null
@@ -150,7 +147,7 @@ class AddHomeworkActivity : AppCompatActivity() {
                         setResult(RESULT_DELETE, intent)
                         finish()
                     } else {
-                        Toast.makeText(this@AddHomeworkActivity, "Gagal menghapus data", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@AddHomework, "Gagal menghapus data", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
